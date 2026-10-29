@@ -104,7 +104,7 @@
       color: var(--orange);
     }
 
-    /* Barra arredondada de troca de tema (Toggle Switch) */
+    /* Barra arredondada de troca de tema */
     .theme-toggle-wrapper {
       display: flex;
       align-items: center;
@@ -161,7 +161,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
+      padding: 120px 20px 60px;
     }
 
     .hero-badge {
@@ -212,9 +212,403 @@
     .hero p {
       font-size: 1.15rem;
       max-width: 580px;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
       color: var(--text-muted);
       font-weight: 400;
+    }
+
+    /* Estilos do Card Universo & Pixel Art */
+    .screen-canvas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 35px;
+    }
+
+    .screen-wrapper {
+      perspective: 1200px;
+      display: inline-block;
+    }
+
+    .screen-card {
+      position: relative;
+      width: 310px;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #0b0c10;
+      border: 1px solid rgba(232, 93, 4, 0.4);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(232, 93, 4, 0.15);
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+    }
+
+    .screen-wrapper:hover .screen-card {
+      transform: rotateX(8deg) rotateY(-12deg) scale(1.03);
+      box-shadow: 25px 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(232, 93, 4, 0.35);
+    }
+
+    .screen-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.15) 48%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.15) 52%,
+        transparent 65%,
+        transparent 100%
+      );
+      z-index: 10;
+      background-size: 250% 250%;
+      background-position: 100% 100%;
+      transition: background-position 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      mix-blend-mode: overlay;
+    }
+
+    .screen-wrapper:hover .screen-card::after {
+      background-position: 0% 0%;
+    }
+
+    .space-viewport {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .nebula-glow {
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background: radial-gradient(circle at 50% 40%, rgba(232, 93, 4, 0.25), rgba(76, 29, 149, 0.2) 40%, transparent 70%);
+      filter: blur(30px);
+      animation: pulse-nebula 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-nebula {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .stars-layer {
+      position: absolute;
+      inset: 0;
+      background-repeat: repeat;
+    }
+
+    .stars-deep {
+      background-image: 
+        radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 150px 200px, #ffb703, transparent),
+        radial-gradient(1px 1px at 260px 80px, #fff, transparent);
+      background-size: 300px 300px;
+      opacity: 0.6;
+      animation: star-drift 40s linear infinite;
+    }
+
+    .stars-mid {
+      background-image: 
+        radial-gradient(1.5px 1.5px at 50px 70px, #fff, transparent),
+        radial-gradient(2px 2px at 190px 140px, #e85d04, transparent),
+        radial-gradient(1.5px 1.5px at 220px 260px, #fff, transparent);
+      background-size: 260px 260px;
+      opacity: 0.8;
+      animation: star-drift 22s linear infinite;
+    }
+
+    .stars-front {
+      background-image: 
+        radial-gradient(2px 2px at 110px 40px, #fff, transparent),
+        radial-gradient(2.5px 2.5px at 280px 190px, #ffd166, transparent);
+      background-size: 220px 220px;
+      animation: twinkle 3s ease-in-out infinite alternate, star-drift 14s linear infinite;
+    }
+
+    @keyframes star-drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-300px); }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    .cyber-grid {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 45%;
+      background-image: 
+        linear-gradient(rgba(232, 93, 4, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 93, 4, 0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+      transform: perspective(250px) rotateX(65deg) scale(1.5);
+      transform-origin: bottom center;
+    }
+
+    .screen-body {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 14px;
+    }
+
+    .screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(18, 18, 20, 0.7);
+      backdrop-filter: blur(6px);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .screen-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-close { background-color: #ff5f56; }
+    .dot-min { background-color: #ffbd2e; }
+    .dot-max { background-color: #27c93f; }
+
+    .screen-badge {
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: #e85d04;
+      letter-spacing: 0.5px;
+    }
+
+    .pixel-stage {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 5px;
+    }
+
+    .dev-character {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: breathing 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes breathing {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-3px); }
+    }
+
+    .pixel-head {
+      position: relative;
+      width: 32px;
+      height: 30px;
+    }
+
+    .pixel-hair {
+      width: 32px;
+      height: 16px;
+      background-color: #2b1d0c;
+      border-radius: 6px 6px 0 0;
+      box-shadow: 0 4px 0 #1b1208;
+    }
+
+    .pixel-face {
+      width: 24px;
+      height: 14px;
+      margin: 0 auto;
+      background-color: #f6c89f;
+    }
+
+    .pixel-headphones {
+      position: absolute;
+      top: 5px;
+      left: -4px;
+      right: -4px;
+      height: 18px;
+      border: 3px solid #e85d04;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .pixel-torso {
+      position: relative;
+      width: 44px;
+      height: 34px;
+      background-color: #1a1a24;
+      border-radius: 6px 6px 0 0;
+      border-top: 4px solid #e85d04;
+    }
+
+    .pixel-arm {
+      position: absolute;
+      width: 9px;
+      height: 22px;
+      background-color: #1a1a24;
+      bottom: -4px;
+    }
+
+    .arm-left {
+      left: -4px;
+      transform-origin: top left;
+      animation: typing-left 0.18s infinite alternate ease-in-out;
+    }
+
+    .arm-right {
+      right: -4px;
+      transform-origin: top right;
+      animation: typing-right 0.18s 0.09s infinite alternate ease-in-out;
+    }
+
+    @keyframes typing-left {
+      0% { transform: rotate(18deg) translateY(0); }
+      100% { transform: rotate(26deg) translateY(3px); }
+    }
+
+    @keyframes typing-right {
+      0% { transform: rotate(-26deg) translateY(3px); }
+      100% { transform: rotate(-18deg) translateY(0); }
+    }
+
+    .pixel-workspace {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .pixel-laptop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .laptop-screen {
+      width: 54px;
+      height: 36px;
+      background-color: #0f172a;
+      border: 3px solid #64748b;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 0 16px rgba(232, 93, 4, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .code-lines {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .code-lines span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background-color: #e85d04;
+      animation: code-flicker 0.6s infinite alternate;
+    }
+
+    .code-lines span:nth-child(1) { width: 70%; }
+    .code-lines span:nth-child(2) { width: 90%; background-color: #f7f4ed; }
+    .code-lines span:nth-child(3) { width: 50%; }
+
+    @keyframes code-flicker {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    .laptop-base {
+      width: 70px;
+      height: 5px;
+      background-color: #94a3b8;
+      border-radius: 2px;
+    }
+
+    .pixel-desk {
+      width: 200px;
+      height: 7px;
+      background: #2b2825;
+      border-radius: 4px;
+      border-bottom: 2px solid #e85d04;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .screen-footer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: rgba(18, 18, 20, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .status-label {
+      font-size: 0.5rem;
+      color: #8b857d;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-val {
+      font-size: 0.7rem;
+      color: #f7f4ed;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .live-indicator {
+      color: #e85d04;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .live-indicator::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background-color: #e85d04;
+      border-radius: 50%;
+      animation: pulse-live 1s infinite alternate;
+    }
+
+    @keyframes pulse-live {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
     }
 
     /* Botões */
@@ -426,6 +820,70 @@
   <!-- Apresentação Principal -->
   <section class="hero" id="inicio">
     <div class="hero-badge">Disponível para novos projetos</div>
+
+    <!-- O Card 3D do Universo e Personagem Pixel Art -->
+    <div class="screen-canvas">
+      <div class="screen-wrapper">
+        <div class="screen-card">
+          <div class="space-viewport">
+            <div class="nebula-glow"></div>
+            <div class="stars-layer stars-deep"></div>
+            <div class="stars-layer stars-mid"></div>
+            <div class="stars-layer stars-front"></div>
+            <div class="cyber-grid"></div>
+          </div>
+          <div class="screen-body">
+            <div class="screen-header">
+              <div class="screen-controls">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-min"></span>
+                <span class="dot dot-max"></span>
+              </div>
+              <div class="screen-badge">vitor.dev // live</div>
+            </div>
+            <div class="pixel-stage">
+              <div class="dev-character">
+                <div class="pixel-head">
+                  <div class="pixel-hair"></div>
+                  <div class="pixel-face"></div>
+                  <div class="pixel-headphones"></div>
+                </div>
+                <div class="pixel-torso">
+                  <div class="pixel-arm arm-left"></div>
+                  <div class="pixel-arm arm-right"></div>
+                </div>
+              </div>
+              <div class="pixel-workspace">
+                <div class="pixel-laptop">
+                  <div class="laptop-screen">
+                    <div class="code-lines">
+                      <span></span><span></span><span></span>
+                    </div>
+                  </div>
+                  <div class="laptop-base"></div>
+                </div>
+                <div class="pixel-desk"></div>
+              </div>
+            </div>
+            <div class="screen-footer">
+              <div class="status-item">
+                <span class="status-label">STATUS</span>
+                <span class="status-val live-indicator">Codando...</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">PROJETO</span>
+                <span class="status-val">Portfólio Web</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">LOCAL</span>
+                <span class="status-val">São Paulo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h1>Olá, eu sou o Vitor</h1>
     
     <div class="typing-container">
@@ -510,7 +968,6 @@
     // 1. Alternador de Tema Escuro / Claro
     const themeToggle = document.getElementById("theme-toggle");
     
-    // Recupera a preferência salva no navegador
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark-mode");
     }
