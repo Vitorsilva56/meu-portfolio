@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitor Alcantara | Desenvolvedor</title>
   <style>
-    /* Tema Claro (Bege Minimalista) */
+    /* ==========================================================================
+       Variáveis de Cores e Temas
+       ========================================================================== */
     :root {
       --bg-color: #f7f4ed;
       --card-bg: #ffffff;
-      --nav-bg: rgba(247, 244, 237, 0.85);
+      --nav-bg: rgba(247, 244, 237, 0.88);
       --footer-bg: #f2eee5;
       --text-main: #2b2825;
       --text-muted: #736c64;
@@ -23,13 +25,25 @@
       --btn-white-hover: #fdfdfd;
       --orange: #e85d04;
       --orange-hover: #dc2f02;
+
+      /* Cores do Card no Modo Claro (Dia) */
+      --screen-border: rgba(232, 93, 4, 0.35);
+      --screen-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 25px rgba(232, 93, 4, 0.12);
+      --header-bg: rgba(255, 255, 255, 0.85);
+      --header-border: rgba(232, 93, 4, 0.18);
+      --footer-card-bg: rgba(255, 255, 255, 0.85);
+      --footer-text-label: #8c827a;
+      --footer-text-val: #2b2825;
+      --desk-color: #d8cebe;
+      --dev-shirt: #ffffff;
+      --dev-shirt-border: #e85d04;
+      --laptop-glow: rgba(232, 93, 4, 0.4);
     }
 
-    /* Tema Escuro */
     body.dark-mode {
       --bg-color: #121214;
       --card-bg: #1a1a1e;
-      --nav-bg: rgba(18, 18, 20, 0.85);
+      --nav-bg: rgba(18, 18, 20, 0.88);
       --footer-bg: #161619;
       --text-main: #f0ede6;
       --text-muted: #a69f94;
@@ -43,6 +57,19 @@
       --btn-white-hover: #262529;
       --orange: #ff7b24;
       --orange-hover: #f0670d;
+
+      /* Cores do Card no Modo Escuro (Noite) */
+      --screen-border: rgba(255, 123, 36, 0.45);
+      --screen-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 123, 36, 0.2);
+      --header-bg: rgba(18, 18, 20, 0.75);
+      --header-border: rgba(255, 255, 255, 0.08);
+      --footer-card-bg: rgba(18, 18, 20, 0.85);
+      --footer-text-label: #8b857d;
+      --footer-text-val: #f7f4ed;
+      --desk-color: #2b2825;
+      --dev-shirt: #1a1a24;
+      --dev-shirt-border: #ff7b24;
+      --laptop-glow: rgba(255, 123, 36, 0.7);
     }
 
     * {
@@ -50,7 +77,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
     }
 
     body {
@@ -60,14 +87,16 @@
       scroll-behavior: smooth;
     }
 
-    /* Barra Superior */
+    /* ==========================================================================
+       Menu Superior & Navegação
+       ========================================================================== */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
       background: var(--nav-bg);
-      backdrop-filter: blur(10px);
-      padding: 18px 40px;
+      backdrop-filter: blur(12px);
+      padding: 14px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -104,56 +133,173 @@
       color: var(--orange);
     }
 
-    /* Barra arredondada de troca de tema */
-    .theme-toggle-wrapper {
-      display: flex;
-      align-items: center;
-    }
+    /* ==========================================================================
+       Botão de Alternância (Uiverse - Paleta Laranja & Bege)
+       ========================================================================== */
+    .toggle-cont {
+      --primary: var(--orange);
+      --light: #fffaf4;
+      --dark: #22201e;
+      --gray: #3a3734;
 
-    .theme-switch {
       position: relative;
-      width: 60px;
-      height: 30px;
-      background-color: var(--border-color);
-      border-radius: 50px;
+      z-index: 10;
+      width: fit-content;
+      height: 38px;
+      border-radius: 9999px;
+      transform: scale(0.78);
+      transform-origin: center right;
+    }
+
+    .toggle-cont .toggle-input {
+      display: none;
+    }
+
+    .toggle-cont .toggle-label {
+      --gap: 4px;
+      --width: 38px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 6px;
-      user-select: none;
-      border: 1px solid var(--border-color);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline-block;
+      padding: 0.35rem;
+      width: calc((var(--width) + var(--gap)) * 2);
+      height: 100%;
+      background-color: #ded6c9;
+      border: 1px solid #c9bea9;
+      border-bottom: 0;
+      border-radius: 9999px;
+      box-sizing: content-box;
+      transition: all 0.4s ease-in-out;
     }
 
-    .theme-switch-slider {
+    .toggle-label::before {
+      content: "";
       position: absolute;
-      top: 2px;
-      left: 3px;
-      width: 24px;
-      height: 24px;
-      background-color: #ffffff;
+      z-index: -10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(100% + 1rem);
+      height: calc(100% + 1rem);
+      background-color: #ece5d8;
+      border: 1px solid #dcd1be;
+      border-bottom: 0;
+      border-radius: 9999px;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .toggle-label::after {
+      content: "";
+      position: absolute;
+      z-index: -10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(
+        circle at 50% -100%,
+        rgb(255, 154, 82) 0%,
+        rgba(235, 226, 212, 1) 80%
+      );
+      border-radius: 9999px;
+    }
+
+    .toggle-cont .toggle-label .cont-icon {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--width);
+      height: 38px;
+      background-image: radial-gradient(
+        circle at 50% 0%,
+        #ffffff 0%,
+        #e2d7c5 100%
+      );
+      border: 1px solid #cfc1aa;
+      border-bottom: 0;
+      border-radius: 9999px;
+      box-shadow: inset 0 -0.15rem 0.15rem var(--primary), 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease-in-out, background-image 0.4s ease;
+      overflow: clip;
+    }
+
+    .cont-icon .sparkle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: calc(var(--width) * 1px);
+      aspect-ratio: 1;
+      background-color: #ff9f43;
       border-radius: 50%;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform-origin: 50% 50%;
+      rotate: calc(1deg * var(--deg));
+      transform: translate(-50%, -50%);
+      animation: sparkle calc(100s / var(--duration)) linear 0s infinite;
     }
 
-    body.dark-mode .theme-switch-slider {
-      transform: translateX(28px);
-      background-color: var(--orange);
+    @keyframes sparkle {
+      to {
+        width: calc(var(--width) * 0.5px);
+        transform: translate(2000%, -50%);
+      }
     }
 
-    body.dark-mode .theme-switch {
-      background-color: #2a292d;
+    .cont-icon .icon {
+      width: 1rem;
+      fill: #e85d04;
+      transition: fill 0.4s ease;
     }
 
-    .theme-icon {
-      font-size: 0.85rem;
-      z-index: 1;
-      pointer-events: none;
+    /* Estado Ativo (Dark Mode) */
+    body.dark-mode .toggle-cont .toggle-label {
+      background-color: #1a1918;
+      border: 1px solid #453c35;
+      border-bottom: 0;
     }
 
-    /* Seção Hero */
+    body.dark-mode .toggle-label::before {
+      background-color: #272421;
+      border-color: #453c35;
+      box-shadow: 0 1rem 2.5rem -1.5rem rgba(255, 123, 36, 0.6);
+    }
+
+    body.dark-mode .toggle-label::after {
+      background-image: radial-gradient(
+        circle at 50% -100%,
+        rgb(255, 123, 36) 0%,
+        rgba(18, 18, 20, 1) 80%
+      );
+    }
+
+    body.dark-mode .toggle-cont .toggle-label .cont-icon {
+      overflow: visible;
+      background-image: radial-gradient(
+        circle at 50% 0%,
+        #e85d04 0%,
+        #7a2700 100%
+      );
+      border: 1px solid var(--primary);
+      border-bottom: 0;
+      transform: translateX(calc((var(--gap) * 2) + 100%)) rotate(-225deg);
+    }
+
+    body.dark-mode .toggle-cont .toggle-label .cont-icon .icon {
+      fill: #ffffff;
+    }
+
+    body.dark-mode .toggle-cont .toggle-label .cont-icon .sparkle {
+      z-index: -10;
+      width: calc(var(--width) * 1.5px);
+      background-color: #ffb77d;
+      animation: sparkle calc(100s / var(--duration)) linear 0s infinite;
+    }
+
+    /* ==========================================================================
+       Seção Hero & Apresentação
+       ========================================================================== */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -217,7 +363,9 @@
       font-weight: 400;
     }
 
-    /* Estilos do Card Universo & Pixel Art */
+    /* ==========================================================================
+       Card Interativo: Transição Suave Dia e Noite
+       ========================================================================== */
     .screen-canvas {
       display: flex;
       align-items: center;
@@ -236,18 +384,17 @@
       height: 420px;
       border-radius: 16px;
       overflow: hidden;
-      background-color: #0b0c10;
-      border: 1px solid rgba(232, 93, 4, 0.4);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(232, 93, 4, 0.15);
+      border: 1px solid var(--screen-border);
+      box-shadow: var(--screen-shadow);
       transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease, border-color 0.6s ease;
     }
 
     .screen-wrapper:hover .screen-card {
       transform: rotateX(8deg) rotateY(-12deg) scale(1.03);
-      box-shadow: 25px 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(232, 93, 4, 0.35);
     }
 
+    /* Brilho Holográfico na diagonal */
     .screen-card::after {
       content: "";
       position: absolute;
@@ -274,11 +421,74 @@
       background-position: 0% 0%;
     }
 
+    /* Viewport do Ambiente Cósmico / Solar */
     .space-viewport {
       position: absolute;
       inset: 0;
       overflow: hidden;
       z-index: 0;
+    }
+
+    /* CAMADA 1: O DIA (Céu azul suave, sol radiante e nuvens) */
+    .day-sky {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #6ec1ff 0%, #a2d7ff 45%, #fce9d2 85%, #f7f4ed 100%);
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+      z-index: 1;
+    }
+
+    /* Sol Radiante */
+    .sun {
+      position: absolute;
+      top: 48px;
+      right: 48px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff7d6 20%, #ffa500 100%);
+      box-shadow: 0 0 25px rgba(255, 165, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5);
+      animation: sun-pulse 4s infinite alternate ease-in-out;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes sun-pulse {
+      0% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255, 170, 0, 0.6)); }
+      100% { transform: scale(1.06); filter: drop-shadow(0 0 25px rgba(255, 170, 0, 0.9)); }
+    }
+
+    /* Nuvens Flutuantes */
+    .clouds-layer {
+      position: absolute;
+      top: 65px;
+      left: 0;
+      width: 200%;
+      height: 60px;
+      background: 
+        radial-gradient(circle at 30px 30px, rgba(255,255,255,0.7) 15px, transparent 16px),
+        radial-gradient(circle at 60px 25px, rgba(255,255,255,0.8) 22px, transparent 23px),
+        radial-gradient(circle at 90px 30px, rgba(255,255,255,0.7) 15px, transparent 16px),
+        radial-gradient(circle at 210px 30px, rgba(255,255,255,0.6) 18px, transparent 19px),
+        radial-gradient(circle at 240px 25px, rgba(255,255,255,0.7) 22px, transparent 23px);
+      animation: cloud-drift 28s linear infinite;
+    }
+
+    @keyframes cloud-drift {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* CAMADA 2: A NOITE (Estrelas, Nebulosa e Universo) */
+    .night-sky {
+      position: absolute;
+      inset: 0;
+      background: #090a0f;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+      z-index: 2;
     }
 
     .nebula-glow {
@@ -287,13 +497,13 @@
       height: 150%;
       top: -25%;
       left: -25%;
-      background: radial-gradient(circle at 50% 40%, rgba(232, 93, 4, 0.25), rgba(76, 29, 149, 0.2) 40%, transparent 70%);
-      filter: blur(30px);
+      background: radial-gradient(circle at 50% 40%, rgba(255, 123, 36, 0.3), rgba(109, 40, 217, 0.25) 45%, transparent 70%);
+      filter: blur(28px);
       animation: pulse-nebula 6s ease-in-out infinite alternate;
     }
 
     @keyframes pulse-nebula {
-      0% { transform: scale(0.9); opacity: 0.7; }
+      0% { transform: scale(0.9); opacity: 0.6; }
       100% { transform: scale(1.1); opacity: 1; }
     }
 
@@ -317,7 +527,7 @@
     .stars-mid {
       background-image: 
         radial-gradient(1.5px 1.5px at 50px 70px, #fff, transparent),
-        radial-gradient(2px 2px at 190px 140px, #e85d04, transparent),
+        radial-gradient(2px 2px at 190px 140px, #ff7b24, transparent),
         radial-gradient(1.5px 1.5px at 220px 260px, #fff, transparent);
       background-size: 260px 260px;
       opacity: 0.8;
@@ -342,22 +552,40 @@
       100% { opacity: 1; }
     }
 
+    /* Comportamento de transição dia/noite no Modo Escuro */
+    body.dark-mode .day-sky {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    body.dark-mode .day-sky .sun {
+      transform: translateY(80px) scale(0.5);
+    }
+
+    body.dark-mode .night-sky {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Malha do chão em perspectiva */
     .cyber-grid {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 45%;
+      height: 44%;
       background-image: 
-        linear-gradient(rgba(232, 93, 4, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232, 93, 4, 0.15) 1px, transparent 1px);
+        linear-gradient(rgba(232, 93, 4, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 93, 4, 0.16) 1px, transparent 1px);
       background-size: 24px 24px;
       transform: perspective(250px) rotateX(65deg) scale(1.5);
       transform-origin: bottom center;
+      z-index: 3;
     }
 
+    /* Estrutura Frontal do Card */
     .screen-body {
       position: relative;
-      z-index: 2;
+      z-index: 4;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -369,11 +597,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(18, 18, 20, 0.7);
-      backdrop-filter: blur(6px);
+      background: var(--header-bg);
+      backdrop-filter: blur(8px);
       padding: 8px 12px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--header-border);
+      transition: all 0.5s ease;
     }
 
     .screen-controls {
@@ -394,10 +623,12 @@
     .screen-badge {
       font-family: monospace;
       font-size: 0.7rem;
-      color: #e85d04;
+      color: var(--orange);
       letter-spacing: 0.5px;
+      font-weight: 600;
     }
 
+    /* Palco Pixel Art */
     .pixel-stage {
       flex-grow: 1;
       display: flex;
@@ -446,26 +677,30 @@
       left: -4px;
       right: -4px;
       height: 18px;
-      border: 3px solid #e85d04;
+      border: 3px solid var(--orange);
       border-bottom: none;
       border-radius: 8px 8px 0 0;
+      transition: border-color 0.4s ease;
     }
 
     .pixel-torso {
       position: relative;
       width: 44px;
       height: 34px;
-      background-color: #1a1a24;
+      background-color: var(--dev-shirt);
       border-radius: 6px 6px 0 0;
-      border-top: 4px solid #e85d04;
+      border-top: 4px solid var(--dev-shirt-border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
 
     .pixel-arm {
       position: absolute;
       width: 9px;
       height: 22px;
-      background-color: #1a1a24;
+      background-color: var(--dev-shirt);
       bottom: -4px;
+      transition: background-color 0.4s ease;
     }
 
     .arm-left {
@@ -494,7 +729,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      z-index: 3;
+      z-index: 5;
     }
 
     .pixel-laptop {
@@ -510,10 +745,11 @@
       border: 3px solid #64748b;
       border-bottom: none;
       border-radius: 4px 4px 0 0;
-      box-shadow: 0 0 16px rgba(232, 93, 4, 0.6);
+      box-shadow: 0 0 16px var(--laptop-glow);
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: box-shadow 0.4s ease;
     }
 
     .code-lines {
@@ -527,7 +763,7 @@
       display: block;
       height: 2px;
       border-radius: 2px;
-      background-color: #e85d04;
+      background-color: var(--orange);
       animation: code-flicker 0.6s infinite alternate;
     }
 
@@ -550,21 +786,23 @@
     .pixel-desk {
       width: 200px;
       height: 7px;
-      background: #2b2825;
+      background: var(--desk-color);
       border-radius: 4px;
-      border-bottom: 2px solid #e85d04;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border-bottom: 2px solid var(--orange);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
 
     .screen-footer {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
-      background: rgba(18, 18, 20, 0.85);
+      background: var(--footer-card-bg);
       backdrop-filter: blur(8px);
       padding: 8px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--header-border);
+      transition: all 0.5s ease;
     }
 
     .status-item {
@@ -575,14 +813,14 @@
 
     .status-label {
       font-size: 0.5rem;
-      color: #8b857d;
+      color: var(--footer-text-label);
       font-weight: 700;
       letter-spacing: 0.5px;
     }
 
     .status-val {
       font-size: 0.7rem;
-      color: #f7f4ed;
+      color: var(--footer-text-val);
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -590,7 +828,7 @@
     }
 
     .live-indicator {
-      color: #e85d04;
+      color: var(--orange);
       display: flex;
       align-items: center;
       gap: 4px;
@@ -601,7 +839,7 @@
       display: inline-block;
       width: 5px;
       height: 5px;
-      background-color: #e85d04;
+      background-color: var(--orange);
       border-radius: 50%;
       animation: pulse-live 1s infinite alternate;
     }
@@ -611,7 +849,9 @@
       100% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* Botões */
+    /* ==========================================================================
+       Botões de Chamada (Hero)
+       ========================================================================== */
     .btn-group {
       display: flex;
       gap: 15px;
@@ -656,7 +896,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
-    /* Seção de Projetos */
+    /* ==========================================================================
+       Projetos
+       ========================================================================== */
     .section {
       padding: 100px 20px;
       max-width: 1050px;
@@ -744,7 +986,9 @@
       gap: 10px;
     }
 
-    /* Rodapé / Contato */
+    /* ==========================================================================
+       Rodapé / Contato
+       ========================================================================== */
     footer {
       text-align: center;
       padding: 70px 20px 40px;
@@ -782,7 +1026,7 @@
 
     @media (max-width: 650px) {
       nav {
-        padding: 15px 20px;
+        padding: 12px 18px;
       }
       .nav-links {
         display: none;
@@ -806,13 +1050,40 @@
         <a href="#contato">Contato</a>
       </div>
 
-      <!-- Barra arredondada de troca de tema (Switch) -->
-      <div class="theme-toggle-wrapper">
-        <div class="theme-switch" id="theme-toggle" title="Alternar tema claro/escuro">
-          <span class="theme-icon">☀️</span>
-          <span class="theme-icon">🌙</span>
-          <div class="theme-switch-slider"></div>
-        </div>
+      <!-- Novo Botão Uiverse (Modo Claro/Escuro) -->
+      <div class="toggle-cont">
+        <input class="toggle-input" id="toggle" name="toggle" type="checkbox" />
+        <label class="toggle-label" for="toggle" title="Alternar Modo Claro / Modo Escuro">
+          <div class="cont-icon">
+            <span style="--width: 2; --deg: 25; --duration: 11" class="sparkle"></span>
+            <span style="--width: 1; --deg: 100; --duration: 18" class="sparkle"></span>
+            <span style="--width: 1; --deg: 280; --duration: 5" class="sparkle"></span>
+            <span style="--width: 2; --deg: 200; --duration: 3" class="sparkle"></span>
+            <span style="--width: 2; --deg: 30; --duration: 20" class="sparkle"></span>
+            <span style="--width: 2; --deg: 300; --duration: 9" class="sparkle"></span>
+            <span style="--width: 1; --deg: 250; --duration: 4" class="sparkle"></span>
+            <span style="--width: 2; --deg: 210; --duration: 8" class="sparkle"></span>
+            <span style="--width: 2; --deg: 100; --duration: 9" class="sparkle"></span>
+            <span style="--width: 1; --deg: 15; --duration: 13" class="sparkle"></span>
+            <span style="--width: 1; --deg: 75; --duration: 18" class="sparkle"></span>
+            <span style="--width: 2; --deg: 65; --duration: 6" class="sparkle"></span>
+            <span style="--width: 2; --deg: 50; --duration: 7" class="sparkle"></span>
+            <span style="--width: 1; --deg: 320; --duration: 5" class="sparkle"></span>
+            <span style="--width: 1; --deg: 220; --duration: 5" class="sparkle"></span>
+            <span style="--width: 1; --deg: 215; --duration: 2" class="sparkle"></span>
+            <span style="--width: 2; --deg: 135; --duration: 9" class="sparkle"></span>
+            <span style="--width: 2; --deg: 45; --duration: 4" class="sparkle"></span>
+            <span style="--width: 1; --deg: 78; --duration: 16" class="sparkle"></span>
+            <span style="--width: 1; --deg: 89; --duration: 19" class="sparkle"></span>
+            <span style="--width: 2; --deg: 65; --duration: 14" class="sparkle"></span>
+            <span style="--width: 2; --deg: 97; --duration: 1" class="sparkle"></span>
+            <span style="--width: 1; --deg: 174; --duration: 10" class="sparkle"></span>
+            <span style="--width: 1; --deg: 236; --duration: 5" class="sparkle"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 30 30" class="icon">
+              <path d="M0.96233 28.61C1.36043 29.0081 1.96007 29.1255 2.47555 28.8971L10.4256 25.3552C13.2236 24.11 16.4254 24.1425 19.2107 25.4401L27.4152 29.2747C27.476 29.3044 27.5418 29.3023 27.6047 29.32C27.6563 29.3348 27.7079 29.3497 27.761 29.3574C27.843 29.3687 27.9194 29.3758 28 29.3688C28.1273 29.3617 28.2531 29.3405 28.3726 29.2945C28.4447 29.262 28.5162 29.2287 28.5749 29.1842C28.6399 29.1446 28.6993 29.0994 28.7509 29.0477L28.9008 28.8582C28.9468 28.7995 28.9793 28.7274 29.0112 28.656C29.0599 28.5322 29.0811 28.4036 29.0882 28.2734C29.0939 28.1957 29.0868 28.1207 29.0769 28.0415C29.0705 27.9955 29.0585 27.9524 29.0472 27.9072C29.0295 27.8343 29.0302 27.7601 28.9984 27.6901L25.1638 19.4855C23.8592 16.7073 23.8273 13.5048 25.0726 10.7068L28.6145 2.75679C28.8429 2.24131 28.7318 1.63531 28.3337 1.2372C27.9165 0.820011 27.271 0.721743 26.7491 0.9961L19.8357 4.59596C16.8418 6.15442 13.2879 6.18696 10.2615 4.70062L1.80308 0.520214C1.7055 0.474959 1.60722 0.441742 1.50964 0.421943C1.44459 0.409215 1.37882 0.395769 1.3074 0.402133C1.14406 0.395769 0.981436 0.428275 0.818095 0.499692C0.77284 0.519491 0.719805 0.545671 0.67455 0.578198C0.596061 0.617088 0.524653 0.675786 0.4596 0.74084C0.394546 0.805894 0.335843 0.877306 0.296245 0.956502C0.263718 1.00176 0.237561 1.05477 0.217762 1.10003C0.152708 1.24286 0.126545 1.40058 0.120181 1.54978C0.120181 1.61483 0.126527 1.6735 0.132891 1.73219C0.15269 1.85664 0.178881 1.97332 0.237571 2.08434L4.41798 10.5427C5.91139 13.5621 5.8725 17.1238 4.3204 20.1099L0.720514 27.0233C0.440499 27.5536 0.545137 28.1928 0.96233 28.61Z"></path>
+            </svg>
+          </div>
+        </label>
       </div>
     </div>
   </nav>
@@ -821,17 +1092,29 @@
   <section class="hero" id="inicio">
     <div class="hero-badge">Disponível para novos projetos</div>
 
-    <!-- O Card 3D do Universo e Personagem Pixel Art -->
+    <!-- O Card 3D Dinâmico (Dia / Noite Cósmica) -->
     <div class="screen-canvas">
       <div class="screen-wrapper">
         <div class="screen-card">
+          
           <div class="space-viewport">
-            <div class="nebula-glow"></div>
-            <div class="stars-layer stars-deep"></div>
-            <div class="stars-layer stars-mid"></div>
-            <div class="stars-layer stars-front"></div>
+            <!-- Camada do Dia -->
+            <div class="day-sky">
+              <div class="sun"></div>
+              <div class="clouds-layer"></div>
+            </div>
+
+            <!-- Camada da Noite Cósmica -->
+            <div class="night-sky">
+              <div class="nebula-glow"></div>
+              <div class="stars-layer stars-deep"></div>
+              <div class="stars-layer stars-mid"></div>
+              <div class="stars-layer stars-front"></div>
+            </div>
+
             <div class="cyber-grid"></div>
           </div>
+
           <div class="screen-body">
             <div class="screen-header">
               <div class="screen-controls">
@@ -841,6 +1124,7 @@
               </div>
               <div class="screen-badge">vitor.dev // live</div>
             </div>
+
             <div class="pixel-stage">
               <div class="dev-character">
                 <div class="pixel-head">
@@ -865,6 +1149,7 @@
                 <div class="pixel-desk"></div>
               </div>
             </div>
+
             <div class="screen-footer">
               <div class="status-item">
                 <span class="status-label">STATUS</span>
@@ -880,6 +1165,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -965,19 +1251,21 @@
 
   <!-- Scripts -->
   <script>
-    // 1. Alternador de Tema Escuro / Claro
-    const themeToggle = document.getElementById("theme-toggle");
-    
+    // 1. Controle do Botão Uiverse & Alternância de Tema
+    const themeCheckbox = document.getElementById("toggle");
+
+    // Aplica o tema salvo previamente
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark-mode");
+      themeCheckbox.checked = true;
     }
 
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      
-      if (document.body.classList.contains("dark-mode")) {
+    themeCheckbox.addEventListener("change", () => {
+      if (themeCheckbox.checked) {
+        document.body.classList.add("dark-mode");
         localStorage.setItem("theme", "dark");
       } else {
+        document.body.classList.remove("dark-mode");
         localStorage.setItem("theme", "light");
       }
     });
@@ -1021,7 +1309,7 @@
 
     typeEffect();
 
-    // 3. Efeito de Aparição ao Rolar
+    // 3. Efeito de Aparição dos Cards ao Rolar
     const cards = document.querySelectorAll(".project-card");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
