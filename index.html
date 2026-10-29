@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitor | Desenvolvedor</title>
   <style>
-    /* Configurações Globais */
     * {
       margin: 0;
       padding: 0;
@@ -20,7 +19,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Barra de Navegação */
+    /* Menu Superior */
     nav {
       position: fixed;
       top: 0;
@@ -52,7 +51,7 @@
       color: #58a6ff;
     }
 
-    /* Secção Hero (Apresentação) */
+    /* Seção Principal (Hero) */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -66,28 +65,56 @@
     .hero h1 {
       font-size: 3rem;
       color: #ffffff;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .hero h1 span {
       color: #2ea043;
     }
 
+    /* Efeito de digitação */
+    .typing-container {
+      font-size: 1.4rem;
+      color: #58a6ff;
+      min-height: 2rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background-color: #58a6ff;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       max-width: 600px;
       margin-bottom: 30px;
       color: #8b949e;
     }
 
-    .btn-group a {
+    /* Botões */
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
       display: inline-block;
       padding: 12px 28px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      margin: 0 10px;
-      transition: transform 0.2s, background-color 0.2s;
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
     }
 
     .btn-primary {
@@ -98,6 +125,7 @@
     .btn-primary:hover {
       background-color: #2ea043;
       transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(46, 160, 67, 0.4);
     }
 
     .btn-secondary {
@@ -111,9 +139,9 @@
       transform: translateY(-3px);
     }
 
-    /* Secção de Projetos */
+    /* Seções Gerais */
     .section {
-      padding: 80px 20px;
+      padding: 90px 20px;
       max-width: 1000px;
       margin: 0 auto;
     }
@@ -121,29 +149,38 @@
     .section h2 {
       font-size: 2rem;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
       color: #ffffff;
     }
 
+    /* Grade de Projetos */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
     }
 
-    /* Cartões de Projeto com Efeito Hover */
+    /* Cartões e Efeito de Surgimento */
     .project-card {
       background-color: #161b22;
       border: 1px solid #30363d;
       border-radius: 8px;
       padding: 24px;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    /* Classe que ativa o surgimento quando o elemento entra na tela */
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .project-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       border-color: #58a6ff;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .project-card h3 {
@@ -160,7 +197,7 @@
     .project-tags {
       display: flex;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
@@ -186,10 +223,20 @@
     /* Rodapé */
     footer {
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px;
       border-top: 1px solid #30363d;
       color: #8b949e;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: #58a6ff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -197,7 +244,7 @@
 
   <!-- Menu de Topo -->
   <nav>
-    <div class="logo">Portfólio.dev</div>
+    <div class="logo">Vitor.dev</div>
     <div class="nav-links">
       <a href="#inicio">Início</a>
       <a href="#projetos">Projetos</a>
@@ -208,10 +255,18 @@
   <!-- Apresentação Principal -->
   <section class="hero" id="inicio">
     <h1>Olá, eu sou o <span>Vitor</span></h1>
-    <p>Estudante de programação focado em construir soluções web completas, modernas e interativas.</p>
+    
+    <!-- Texto que se digita sozinho -->
+    <div class="typing-container">
+      <span id="typing-text"></span><span class="cursor">&nbsp;</span>
+    </div>
+
+    <p>Construindo soluções práticas de programação, sites modernos e softwares.</p>
+    
     <div class="btn-group">
-      <a href="#projetos" class="btn-primary">Ver Projetos</a>
-      <a href="#contacto" class="btn-secondary">Contactar</a>
+      <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+      <!-- Link direto para o seu WhatsApp (basta trocar os números) -->
+      <a href="https://wa.me/5500000000000?text=Olá%20Vitor,%20vi%20seu%20portfólio!" target="_blank" class="btn btn-secondary">Chamar no WhatsApp</a>
     </div>
   </section>
 
@@ -222,46 +277,100 @@
       
       <div class="project-card">
         <h3>Painel de Finanças Pessoais</h3>
-        <p>Aplicação web para registo de receitas e despesas com gráficos dinâmicos e balanço mensal.</p>
+        <p>Aplicação web para controle de despesas e receitas com cálculo de saldo e organização por categorias.</p>
         <div class="project-tags">
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
           <span class="tag">JavaScript</span>
         </div>
-        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+        <a href="https://github.com/Vitorsilva56" target="_blank">Acessar Projeto &rarr;</a>
       </div>
 
       <div class="project-card">
         <h3>Quadro Kanban em Tempo Real</h3>
-        <p>Gestor de tarefas com arrastar e soltar (drag & drop) e persistência de dados local.</p>
+        <p>Gerenciador de tarefas interativo com colunas de status (A Fazer, Em Progresso e Concluído).</p>
         <div class="project-tags">
           <span class="tag">JavaScript</span>
-          <span class="tag">Web</span>
+          <span class="tag">Produtividade</span>
         </div>
-        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+        <a href="https://github.com/Vitorsilva56" target="_blank">Acessar Projeto &rarr;</a>
       </div>
 
       <div class="project-card">
         <h3>Encurtador de Links</h3>
-        <p>Serviço simples para encurtar ligações longas e monitorizar estatísticas de cliques.</p>
+        <p>Ferramenta simples para transformar links longos em URLs curtas e fáceis de compartilhar.</p>
         <div class="project-tags">
           <span class="tag">API</span>
-          <span class="tag">Frontend</span>
+          <span class="tag">Web</span>
         </div>
-        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+        <a href="https://github.com/Vitorsilva56" target="_blank">Acessar Projeto &rarr;</a>
       </div>
 
     </div>
   </section>
 
-  <!-- Rodapé / Contacto -->
+  <!-- Rodapé / Contato -->
   <footer id="contacto">
-    <p>&copy; 2026 Vitor. Todos os direitos reservados.</p>
-    <p style="margin-top: 8px;">
-      <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none; margin: 0 10px;">GitHub</a> | 
-      <a href="https://linkedin.com" target="_blank" style="color: #58a6ff; text-decoration: none; margin: 0 10px;">LinkedIn</a>
+    <p>Vamos conversar sobre um projeto?</p>
+    <p style="margin-top: 15px;">
+      <a href="https://github.com/Vitorsilva56" target="_blank">GitHub</a> | 
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a> | 
+      <a href="mailto:seu-email@gmail.com">Enviar E-mail</a>
     </p>
+    <p style="margin-top: 25px; font-size: 0.8rem; color: #484f58;">&copy; 2026 Vitor. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Script das Animações -->
+  <script>
+    // 1. Efeito de Digitação Dinâmica
+    const phrases = [
+      "Desenvolvedor de Software",
+      "Criador de Sites & Aplicações Web",
+      "Soluções em Código"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing-text");
+
+    function typeEffect() {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (isDeleting) {
+        typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 40 : 90;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        speed = 1800; // Pausa após digitar a frase toda
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400; // Pausa antes de começar a próxima frase
+      }
+
+      setTimeout(typeEffect, speed);
+    }
+
+    typeEffect();
+
+    // 2. Animação de surgimento suave dos cartões de projetos
+    const cards = document.querySelectorAll(".project-card");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach((card) => observer.observe(card));
+  </script>
 </body>
 </html>
