@@ -29,15 +29,8 @@
       /* Cores do Card no Modo Claro (Dia) */
       --screen-border: rgba(232, 93, 4, 0.35);
       --screen-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 25px rgba(232, 93, 4, 0.12);
-      --header-bg: rgba(255, 255, 255, 0.85);
-      --header-border: rgba(232, 93, 4, 0.18);
-      --footer-card-bg: rgba(255, 255, 255, 0.85);
-      --footer-text-label: #8c827a;
-      --footer-text-val: #2b2825;
-      --desk-color: #d8cebe;
-      --dev-shirt: #ffffff;
-      --dev-shirt-border: #e85d04;
-      --laptop-glow: rgba(232, 93, 4, 0.4);
+      --header-bg: rgba(255, 255, 255, 0.88);
+      --header-border: rgba(232, 93, 4, 0.2);
     }
 
     body.dark-mode {
@@ -61,15 +54,8 @@
       /* Cores do Card no Modo Escuro (Noite) */
       --screen-border: rgba(255, 123, 36, 0.45);
       --screen-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 123, 36, 0.2);
-      --header-bg: rgba(18, 18, 20, 0.75);
-      --header-border: rgba(255, 255, 255, 0.08);
-      --footer-card-bg: rgba(18, 18, 20, 0.85);
-      --footer-text-label: #8b857d;
-      --footer-text-val: #f7f4ed;
-      --desk-color: #2b2825;
-      --dev-shirt: #1a1a24;
-      --dev-shirt-border: #ff7b24;
-      --laptop-glow: rgba(255, 123, 36, 0.7);
+      --header-bg: rgba(18, 18, 20, 0.8);
+      --header-border: rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -134,7 +120,7 @@
     }
 
     /* ==========================================================================
-       Botão de Alternância (Uiverse - Paleta Laranja & Bege)
+       Botão de Alternância Uiverse (Laranja & Bege)
        ========================================================================== */
     .toggle-cont {
       --primary: var(--orange);
@@ -253,7 +239,6 @@
       transition: fill 0.4s ease;
     }
 
-    /* Estado Ativo (Dark Mode) */
     body.dark-mode .toggle-cont .toggle-label {
       background-color: #1a1918;
       border: 1px solid #453c35;
@@ -298,7 +283,7 @@
     }
 
     /* ==========================================================================
-       Seção Hero & Apresentação
+       Seção Hero
        ========================================================================== */
     .hero {
       min-height: 100vh;
@@ -380,9 +365,9 @@
 
     .screen-card {
       position: relative;
-      width: 310px;
-      height: 420px;
-      border-radius: 16px;
+      width: 340px;
+      height: 410px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--screen-border);
       box-shadow: var(--screen-shadow);
@@ -421,7 +406,7 @@
       background-position: 0% 0%;
     }
 
-    /* Viewport do Ambiente Cósmico / Solar */
+    /* Fundo Céu / Universo */
     .space-viewport {
       position: absolute;
       inset: 0;
@@ -429,7 +414,7 @@
       z-index: 0;
     }
 
-    /* CAMADA 1: O DIA (Céu azul suave, sol radiante e nuvens) */
+    /* O DIA */
     .day-sky {
       position: absolute;
       inset: 0;
@@ -440,11 +425,10 @@
       z-index: 1;
     }
 
-    /* Sol Radiante */
     .sun {
       position: absolute;
       top: 48px;
-      right: 48px;
+      right: 42px;
       width: 52px;
       height: 52px;
       border-radius: 50%;
@@ -459,7 +443,6 @@
       100% { transform: scale(1.06); filter: drop-shadow(0 0 25px rgba(255, 170, 0, 0.9)); }
     }
 
-    /* Nuvens Flutuantes */
     .clouds-layer {
       position: absolute;
       top: 65px;
@@ -480,7 +463,7 @@
       to { transform: translateX(-50%); }
     }
 
-    /* CAMADA 2: A NOITE (Estrelas, Nebulosa e Universo) */
+    /* A NOITE CÓSMICA */
     .night-sky {
       position: absolute;
       inset: 0;
@@ -552,7 +535,6 @@
       100% { opacity: 1; }
     }
 
-    /* Comportamento de transição dia/noite no Modo Escuro */
     body.dark-mode .day-sky {
       opacity: 0;
       transform: translateY(100%);
@@ -567,7 +549,6 @@
       transform: translateY(0);
     }
 
-    /* Malha do chão em perspectiva */
     .cyber-grid {
       position: absolute;
       bottom: 0;
@@ -590,7 +571,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 14px;
+      padding: 16px;
     }
 
     .screen-header {
@@ -628,218 +609,105 @@
       font-weight: 600;
     }
 
-    /* Palco Pixel Art */
+    /* Palco Central */
     .pixel-stage {
       flex-grow: 1;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 5px;
+      justify-content: center;
+      padding-top: 10px;
     }
 
-    .dev-character {
+    /* Retângulo Branco Arredondado ao redor da foto + Informações na lateral */
+    .profile-box {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: breathing 2.5s ease-in-out infinite alternate;
+      align-items: stretch;
+      background-color: rgba(255, 255, 255, 0.96);
+      border: 2px solid var(--orange);
+      border-radius: 18px;
+      overflow: hidden;
+      width: 100%;
+      height: 185px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
-    @keyframes breathing {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-3px); }
+    body.dark-mode .profile-box {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), 0 0 18px rgba(255, 123, 36, 0.25);
     }
 
-    .pixel-head {
-      position: relative;
-      width: 32px;
-      height: 30px;
-    }
-
-    .pixel-hair {
-      width: 32px;
-      height: 16px;
-      background-color: #2b1d0c;
-      border-radius: 6px 6px 0 0;
-      box-shadow: 0 4px 0 #1b1208;
-    }
-
-    .pixel-face {
-      width: 24px;
-      height: 14px;
-      margin: 0 auto;
-      background-color: #f6c89f;
-    }
-
-    .pixel-headphones {
-      position: absolute;
-      top: 5px;
-      left: -4px;
-      right: -4px;
-      height: 18px;
-      border: 3px solid var(--orange);
-      border-bottom: none;
-      border-radius: 8px 8px 0 0;
-      transition: border-color 0.4s ease;
-    }
-
-    .pixel-torso {
-      position: relative;
-      width: 44px;
-      height: 34px;
-      background-color: var(--dev-shirt);
-      border-radius: 6px 6px 0 0;
-      border-top: 4px solid var(--dev-shirt-border);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.4s ease, border-color 0.4s ease;
-    }
-
-    .pixel-arm {
-      position: absolute;
-      width: 9px;
-      height: 22px;
-      background-color: var(--dev-shirt);
-      bottom: -4px;
-      transition: background-color 0.4s ease;
-    }
-
-    .arm-left {
-      left: -4px;
-      transform-origin: top left;
-      animation: typing-left 0.18s infinite alternate ease-in-out;
-    }
-
-    .arm-right {
-      right: -4px;
-      transform-origin: top right;
-      animation: typing-right 0.18s 0.09s infinite alternate ease-in-out;
-    }
-
-    @keyframes typing-left {
-      0% { transform: rotate(18deg) translateY(0); }
-      100% { transform: rotate(26deg) translateY(3px); }
-    }
-
-    @keyframes typing-right {
-      0% { transform: rotate(-26deg) translateY(3px); }
-      100% { transform: rotate(-18deg) translateY(0); }
-    }
-
-    .pixel-workspace {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 5;
-    }
-
-    .pixel-laptop {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .laptop-screen {
-      width: 54px;
-      height: 36px;
-      background-color: #0f172a;
-      border: 3px solid #64748b;
-      border-bottom: none;
-      border-radius: 4px 4px 0 0;
-      box-shadow: 0 0 16px var(--laptop-glow);
+    /* Área da imagem (encostando no topo e na base do retângulo) */
+    .profile-img-wrap {
+      flex: 0 0 54%;
+      height: 100%;
+      background-color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: box-shadow 0.4s ease;
+      overflow: hidden;
     }
 
-    .code-lines {
-      width: 80%;
+    .pixel-character-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Área Lateral Direita (Status, Projeto, Local) dentro do retângulo */
+    .profile-info-side {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 3px;
-    }
-
-    .code-lines span {
-      display: block;
-      height: 2px;
-      border-radius: 2px;
-      background-color: var(--orange);
-      animation: code-flicker 0.6s infinite alternate;
-    }
-
-    .code-lines span:nth-child(1) { width: 70%; }
-    .code-lines span:nth-child(2) { width: 90%; background-color: #f7f4ed; }
-    .code-lines span:nth-child(3) { width: 50%; }
-
-    @keyframes code-flicker {
-      0% { opacity: 0.4; }
-      100% { opacity: 1; }
-    }
-
-    .laptop-base {
-      width: 70px;
-      height: 5px;
-      background-color: #94a3b8;
-      border-radius: 2px;
-    }
-
-    .pixel-desk {
-      width: 200px;
-      height: 7px;
-      background: var(--desk-color);
-      border-radius: 4px;
-      border-bottom: 2px solid var(--orange);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.4s ease, border-color 0.4s ease;
-    }
-
-    .screen-footer {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      background: var(--footer-card-bg);
-      backdrop-filter: blur(8px);
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid var(--header-border);
-      transition: all 0.5s ease;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px 14px;
+      border-left: 1px solid #ece5d8;
+      background-color: #ffffff;
+      text-align: left;
     }
 
     .status-item {
       display: flex;
       flex-direction: column;
-      text-align: left;
+      gap: 2px;
     }
 
     .status-label {
-      font-size: 0.5rem;
-      color: var(--footer-text-label);
+      font-size: 0.55rem;
+      color: #8c827a;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
     }
 
     .status-val {
-      font-size: 0.7rem;
-      color: var(--footer-text-val);
-      font-weight: 600;
+      font-size: 0.78rem;
+      color: #2b2825;
+      font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .live-indicator {
-      color: var(--orange);
+      color: #e85d04;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
 
     .live-indicator::before {
       content: "";
       display: inline-block;
-      width: 5px;
-      height: 5px;
-      background-color: var(--orange);
+      width: 6px;
+      height: 6px;
+      background-color: #e85d04;
       border-radius: 50%;
       animation: pulse-live 1s infinite alternate;
     }
@@ -850,7 +718,7 @@
     }
 
     /* ==========================================================================
-       Botões de Chamada (Hero)
+       Botões Hero
        ========================================================================== */
     .btn-group {
       display: flex;
@@ -897,7 +765,7 @@
     }
 
     /* ==========================================================================
-       Projetos
+       Seção de Projetos
        ========================================================================== */
     .section {
       padding: 100px 20px;
@@ -1050,7 +918,7 @@
         <a href="#contato">Contato</a>
       </div>
 
-      <!-- Novo Botão Uiverse (Modo Claro/Escuro) -->
+      <!-- Botão Uiverse (Modo Claro/Escuro) -->
       <div class="toggle-cont">
         <input class="toggle-input" id="toggle" name="toggle" type="checkbox" />
         <label class="toggle-label" for="toggle" title="Alternar Modo Claro / Modo Escuro">
@@ -1092,7 +960,7 @@
   <section class="hero" id="inicio">
     <div class="hero-badge">Disponível para novos projetos</div>
 
-    <!-- O Card 3D Dinâmico (Dia / Noite Cósmica) -->
+    <!-- Card 3D Dinâmico -->
     <div class="screen-canvas">
       <div class="screen-wrapper">
         <div class="screen-card">
@@ -1116,6 +984,7 @@
           </div>
 
           <div class="screen-body">
+            <!-- Topo do Card -->
             <div class="screen-header">
               <div class="screen-controls">
                 <span class="dot dot-close"></span>
@@ -1125,43 +994,31 @@
               <div class="screen-badge">vitor.dev // live</div>
             </div>
 
+            <!-- Retângulo Branco Arredondado com Foto + Informações na Lateral -->
             <div class="pixel-stage">
-              <div class="dev-character">
-                <div class="pixel-head">
-                  <div class="pixel-hair"></div>
-                  <div class="pixel-face"></div>
-                  <div class="pixel-headphones"></div>
+              <div class="profile-box">
+                
+                <!-- Imagem pegando de cima a baixo no lado esquerdo -->
+                <div class="profile-img-wrap">
+                  <img src="dev-pixel.gif" alt="Vitor Desenvolvedor Pixel Art" class="pixel-character-img">
                 </div>
-                <div class="pixel-torso">
-                  <div class="pixel-arm arm-left"></div>
-                  <div class="pixel-arm arm-right"></div>
-                </div>
-              </div>
-              <div class="pixel-workspace">
-                <div class="pixel-laptop">
-                  <div class="laptop-screen">
-                    <div class="code-lines">
-                      <span></span><span></span><span></span>
-                    </div>
-                  </div>
-                  <div class="laptop-base"></div>
-                </div>
-                <div class="pixel-desk"></div>
-              </div>
-            </div>
 
-            <div class="screen-footer">
-              <div class="status-item">
-                <span class="status-label">STATUS</span>
-                <span class="status-val live-indicator">Codando...</span>
-              </div>
-              <div class="status-item">
-                <span class="status-label">PROJETO</span>
-                <span class="status-val">Portfólio Web</span>
-              </div>
-              <div class="status-item">
-                <span class="status-label">LOCAL</span>
-                <span class="status-val">São Paulo</span>
+                <!-- Dados ao lado da foto dentro do retângulo -->
+                <div class="profile-info-side">
+                  <div class="status-item">
+                    <span class="status-label">STATUS</span>
+                    <span class="status-val live-indicator">Codando...</span>
+                  </div>
+                  <div class="status-item">
+                    <span class="status-label">PROJETO</span>
+                    <span class="status-val">Portfólio Web</span>
+                  </div>
+                  <div class="status-item">
+                    <span class="status-label">LOCAL</span>
+                    <span class="status-val">São Paulo</span>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -1254,7 +1111,6 @@
     // 1. Controle do Botão Uiverse & Alternância de Tema
     const themeCheckbox = document.getElementById("toggle");
 
-    // Aplica o tema salvo previamente
     if (localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark-mode");
       themeCheckbox.checked = true;
