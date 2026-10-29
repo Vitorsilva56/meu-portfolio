@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitor | Desenvolvedor</title>
+  <style>
+    /* Configurações Globais */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Barra de Navegação */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #30363d;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #58a6ff;
+    }
+
+    .nav-links a {
+      color: #c9d1d9;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #58a6ff;
+    }
+
+    /* Secção Hero (Apresentação) */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: #2ea043;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      color: #8b949e;
+    }
+
+    .btn-group a {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #238636;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: #2ea043;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background-color: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #30363d;
+      transform: translateY(-3px);
+    }
+
+    /* Secção de Projetos */
+    .section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #ffffff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    /* Cartões de Projeto com Efeito Hover */
+    .project-card {
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #58a6ff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-card h3 {
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: #8b949e;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background-color: #21262d;
+      color: #58a6ff;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    .project-card a {
+      color: #58a6ff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Rodapé */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #30363d;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu de Topo -->
+  <nav>
+    <div class="logo">Portfólio.dev</div>
+    <div class="nav-links">
+      <a href="#inicio">Início</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Apresentação Principal -->
+  <section class="hero" id="inicio">
+    <h1>Olá, eu sou o <span>Vitor</span></h1>
+    <p>Estudante de programação focado em construir soluções web completas, modernas e interativas.</p>
+    <div class="btn-group">
+      <a href="#projetos" class="btn-primary">Ver Projetos</a>
+      <a href="#contacto" class="btn-secondary">Contactar</a>
+    </div>
+  </section>
+
+  <!-- Lista de Projetos -->
+  <section class="section" id="projetos">
+    <h2>Projetos em Destaque</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card">
+        <h3>Painel de Finanças Pessoais</h3>
+        <p>Aplicação web para registo de receitas e despesas com gráficos dinâmicos e balanço mensal.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Quadro Kanban em Tempo Real</h3>
+        <p>Gestor de tarefas com arrastar e soltar (drag & drop) e persistência de dados local.</p>
+        <div class="project-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Web</span>
+        </div>
+        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Encurtador de Links</h3>
+        <p>Serviço simples para encurtar ligações longas e monitorizar estatísticas de cliques.</p>
+        <div class="project-tags">
+          <span class="tag">API</span>
+          <span class="tag">Frontend</span>
+        </div>
+        <a href="https://github.com" target="_blank">Aceder ao Código &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Rodapé / Contacto -->
+  <footer id="contacto">
+    <p>&copy; 2026 Vitor. Todos os direitos reservados.</p>
+    <p style="margin-top: 8px;">
+      <a href="https://github.com" target="_blank" style="color: #58a6ff; text-decoration: none; margin: 0 10px;">GitHub</a> | 
+      <a href="https://linkedin.com" target="_blank" style="color: #58a6ff; text-decoration: none; margin: 0 10px;">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
