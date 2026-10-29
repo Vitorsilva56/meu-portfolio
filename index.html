@@ -5,15 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitor Alcantara | Desenvolvedor</title>
   <style>
-    /* Estilo Minimalista e Paleta Bege */
+    /* Tema Claro (Bege Minimalista) */
     :root {
-      --bg-color: #f7f4ed;        /* Bege suave de fundo */
-      --card-bg: #ffffff;         /* Branco limpo para os cards */
-      --text-main: #2b2825;       /* Texto escuro suave */
-      --text-muted: #736c64;      /* Cinza amarronzado para detalhes */
-      --border-color: #e5ded3;    /* Linhas discretas */
-      --orange: #e85d04;          /* Laranja de destaque */
-      --orange-hover: #dc2f02;    /* Laranja escuro para hover */
+      --bg-color: #f7f4ed;
+      --card-bg: #ffffff;
+      --nav-bg: rgba(247, 244, 237, 0.85);
+      --footer-bg: #f2eee5;
+      --text-main: #2b2825;
+      --text-muted: #736c64;
+      --border-color: #e5ded3;
+      --tag-bg: #f4efe6;
+      --badge-bg: #fcefe7;
+      --badge-border: #f9d8c4;
+      --btn-white-bg: #ffffff;
+      --btn-white-text: #2b2825;
+      --btn-white-border: #e5ded3;
+      --btn-white-hover: #fdfdfd;
+      --orange: #e85d04;
+      --orange-hover: #dc2f02;
+    }
+
+    /* Tema Escuro */
+    body.dark-mode {
+      --bg-color: #121214;
+      --card-bg: #1a1a1e;
+      --nav-bg: rgba(18, 18, 20, 0.85);
+      --footer-bg: #161619;
+      --text-main: #f0ede6;
+      --text-muted: #a69f94;
+      --border-color: #2e2c29;
+      --tag-bg: #262529;
+      --badge-bg: #2d1e15;
+      --badge-border: #4d2b17;
+      --btn-white-bg: #1a1a1e;
+      --btn-white-text: #f0ede6;
+      --btn-white-border: #383531;
+      --btn-white-hover: #262529;
+      --orange: #ff7b24;
+      --orange-hover: #f0670d;
     }
 
     * {
@@ -21,6 +50,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
 
     body {
@@ -30,14 +60,14 @@
       scroll-behavior: smooth;
     }
 
-    /* Menu Superior */
+    /* Barra Superior */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(247, 244, 237, 0.85);
+      background: var(--nav-bg);
       backdrop-filter: blur(10px);
-      padding: 22px 40px;
+      padding: 18px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -56,20 +86,74 @@
       color: var(--orange);
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 24px;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.2s ease;
+      margin-left: 15px;
     }
 
     .nav-links a:hover {
       color: var(--orange);
     }
 
-    /* Seção Hero (Apresentação) */
+    /* Barra arredondada de troca de tema (Toggle Switch) */
+    .theme-toggle-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-switch {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background-color: var(--border-color);
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6px;
+      user-select: none;
+      border: 1px solid var(--border-color);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-switch-slider {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-mode .theme-switch-slider {
+      transform: translateX(28px);
+      background-color: var(--orange);
+    }
+
+    body.dark-mode .theme-switch {
+      background-color: #2a292d;
+    }
+
+    .theme-icon {
+      font-size: 0.85rem;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Seção Hero */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -85,11 +169,11 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--orange);
-      background-color: #fcefe7;
+      background-color: var(--badge-bg);
       padding: 6px 14px;
       border-radius: 20px;
       margin-bottom: 20px;
-      border: 1px solid #f9d8c4;
+      border: 1px solid var(--badge-border);
     }
 
     .hero h1 {
@@ -166,15 +250,14 @@
     }
 
     .btn-white {
-      background-color: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
+      background-color: var(--btn-white-bg);
+      color: var(--btn-white-text);
+      border: 1px solid var(--btn-white-border);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
     .btn-white:hover {
-      background-color: #fdfdfd;
-      border-color: #cfc5b8;
+      background-color: var(--btn-white-hover);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
@@ -201,7 +284,6 @@
       gap: 25px;
     }
 
-    /* Cards com fundo branco e sombra suave */
     .project-card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
@@ -220,8 +302,8 @@
 
     .project-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
-      border-color: #d6ccbe;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+      border-color: var(--orange);
     }
 
     .project-card h3 {
@@ -245,7 +327,7 @@
     }
 
     .tag {
-      background-color: #f4efe6;
+      background-color: var(--tag-bg);
       color: var(--text-muted);
       padding: 4px 12px;
       border-radius: 6px;
@@ -273,7 +355,7 @@
       text-align: center;
       padding: 70px 20px 40px;
       border-top: 1px solid var(--border-color);
-      background-color: #f2eee5;
+      background-color: var(--footer-bg);
     }
 
     footer h3 {
@@ -297,23 +379,47 @@
 
     .copyright {
       font-size: 0.85rem;
-      color: #9c9489;
-      border-top: 1px solid #e3dbcf;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
       padding-top: 25px;
       max-width: 600px;
       margin: 0 auto;
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        padding: 15px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Menu de Topo -->
+  <!-- Menu Superior -->
   <nav>
     <div class="logo">Vitor<span>.</span></div>
-    <div class="nav-links">
-      <a href="#inicio">Início</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#contato">Contato</a>
+
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </div>
+
+      <!-- Barra arredondada de troca de tema (Switch) -->
+      <div class="theme-toggle-wrapper">
+        <div class="theme-switch" id="theme-toggle" title="Alternar tema claro/escuro">
+          <span class="theme-icon">☀️</span>
+          <span class="theme-icon">🌙</span>
+          <div class="theme-switch-slider"></div>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -322,7 +428,6 @@
     <div class="hero-badge">Disponível para novos projetos</div>
     <h1>Olá, eu sou o Vitor</h1>
     
-    <!-- Texto com digitação automática -->
     <div class="typing-container">
       Eu desenvolvo <span id="typing-text"></span><span class="cursor">&nbsp;</span>
     </div>
@@ -330,12 +435,9 @@
     <p>Criando sites rápidos, softwares modernos e soluções inteligentes para a web.</p>
     
     <div class="btn-group">
-      <!-- Botão Laranja Direto para o WhatsApp -->
       <a href="https://wa.me/5511978886173?text=Olá%20Vitor,%20vi%20seu%20portfólio%20e%20gostaria%20de%20conversar!" target="_blank" class="btn btn-orange">
         Falar no WhatsApp &rarr;
       </a>
-      
-      <!-- Botão Branco para Ver os Projetos -->
       <a href="#projetos" class="btn btn-white">
         Ver Projetos
       </a>
@@ -403,9 +505,27 @@
     </div>
   </footer>
 
-  <!-- Script das Animações -->
+  <!-- Scripts -->
   <script>
-    // Digitação dinâmica
+    // 1. Alternador de Tema Escuro / Claro
+    const themeToggle = document.getElementById("theme-toggle");
+    
+    // Recupera a preferência salva no navegador
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      
+      if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+      } else {
+        localStorage.setItem("theme", "light");
+      }
+    });
+
+    // 2. Digitação Dinâmica
     const words = [
       "interfaces minimalistas.",
       "aplicações web modernas.",
@@ -444,7 +564,7 @@
 
     typeEffect();
 
-    // Animação de surgimento suave dos cards ao rolar a página
+    // 3. Efeito de Aparição ao Rolar
     const cards = document.querySelectorAll(".project-card");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
